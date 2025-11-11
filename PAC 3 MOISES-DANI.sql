@@ -1,14 +1,24 @@
+-- --------------- CREACION DATABASE ------------------
+
 DROP DATABASE IF EXISTS `Facultat`;
 
 CREATE DATABASE IF NOT EXISTS `Facultat`;
 
 USE `Facultat`;
+-- --------------- FIN CREACION DATABASE ------------------
 
-CREATE TABLE `professor` 
+-- --------------- CREACION TABLAS ------------------
+CREATE TABLE `professor`(
     `num_seg_social` CHAR(12) UNIQUE NOT NULL,
     `email_institucional` VARCHAR(64) UNIQUE NOT NULL,
     `categoria` CHAR(2) NOT NULL
 );
+
+CREATE TABLE `professor_grup_docent`(
+	`data_inici`DATETIME NOT NULL, 
+    `data_fi` DATETIME NULL
+);
+
 CREATE TABLE `grup_docent`(
 	`codi` INT UNSIGNED AUTO_INCREMENT UNIQUE NOT NULL,
     `any_academic` DATE NOT NULL,
@@ -17,13 +27,8 @@ CREATE TABLE `grup_docent`(
     `capacitat_maxima` CHAR(30)
 );
 
-CREATE TABLE `professor_grup_docent`(
-	`data_inici`DATETIME NOT NULL, 
-    `data_fi` DATETIME NULL
-);
-
 CREATE TABLE `alumne` (
-    `email` VARCHAR(64) NOT NULL,
+    `email` VARCHAR(64) NOT NULL
 );
 
 CREATE TABLE `alumne_estat` (
@@ -100,4 +105,6 @@ CREATE TABLE `sessió`(
     `número`CHAR(9) NOT NULL,
     PRIMARY KEY (`data_sessió`)
 );
+-- --------------- FIN CREACION TABLAS ------------------
+
 ALTER TABLE 
