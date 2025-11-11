@@ -59,17 +59,17 @@ CREATE TABLE `aula_equipament` (
 );
 
 CREATE TABLE `assignatura` (
-    `codi` CHAR(9),
-    `nom` VARCHAR(128),
+    `codi` CHAR(9) UNIQUE NOT NULL,
+    `nom` VARCHAR(128) NOT NULL,
     `tipologia`	ENUM('Troncal', 'Especialitat','Optativa','Lliure Disposició') NOT NULL ,
     PRIMARY KEY(`codi`)
 );
 
 CREATE TABLE `pla_estudis` (
-    `codi` CHAR(9),
-    `nom` VARCHAR(128),
-    `any_implantació` SMALLINT UNSIGNED,
-    `estat`ENUM('Pendent','Actiu','Derogat'),
+    `codi` CHAR(9) UNIQUE NOT NULL,
+    `nom` VARCHAR(128) NOT NULL,
+    `any_implantació` SMALLINT UNSIGNED NOT NULL,
+    `estat`ENUM('Pendent','Actiu','Derogat') NOT NULL,
     PRIMARY KEY(`codi`)
 );
 
@@ -77,7 +77,7 @@ CREATE TABLE `pla_estudis_assignat` (
     `codi_oficial_assign` CHAR(4) NOT NULL,
     `curs`,
     `semestre`,
-    `crédits_ects`
+    `crédits_ects` VARCHAR(3) 
 );
 
 CREATE TABLE matricula`(
@@ -86,18 +86,18 @@ CREATE TABLE matricula`(
 );
 
 CREATE TABLE `matricula_assignatura` (
-    `actes_1a`,
-    `actes_2a`,
-    `actes_extra`
+    `actes_1a` DECIMAL(4,2) NOT NULL,
+    `actes_2a`DECIMAL(4,2) NOT NULL,
+    `actes_extra`DECIMAL(4,2) NOT NULL
 );
 CREATE TABLE `horari`(
-    `dia`,
-    `hora_inici`,
-    `hora_fi`
+    `dia`	DATE NOT NULL,
+    `hora_inici`DATETIME NOT NULL,
+    `hora_fi`DATETIME NULL
 );
 CREATE TABLE `sessió`(
-    `data_sessió`,
-    `número`,
+    `data_sessió`TIME  UNIQUE NOT NULL,
+    `número`CHAR(9) NOT NULL,
     PRIMARY KEY (`data_sessió`)
 );
 ALTER TABLE 
