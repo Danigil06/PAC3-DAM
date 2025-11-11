@@ -1,4 +1,4 @@
-DROP DATABASE IF EXISTS Facultat;
+DROP DATABASE IF EXISTS `Facultat`;
 
 CREATE DATABASE Facultat CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
