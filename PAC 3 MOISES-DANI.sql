@@ -75,9 +75,9 @@ CREATE TABLE `pla_estudis` (
 
 CREATE TABLE `pla_estudis_assignat` (
     `codi_oficial_assign` CHAR(4) NOT NULL,
-    `curs`,
-    `semestre`,
-    `crédits_ects` VARCHAR(3) 
+    `curs` VARCHAR (32) NOT NULL,
+    `semestre` TINYINT UNSIGNED NOT NULL,
+    `crédits_ects` SMALLINT NOT NULL 
 );
 
 CREATE TABLE matricula`(
