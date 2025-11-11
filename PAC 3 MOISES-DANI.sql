@@ -47,10 +47,10 @@ CREATE TABLE `persona_telefon`(
 );
 
 CREATE TABLE `aula` (
-    `campus`,
-    `edifici`,
-    `codi` CHAR(9),
-    `capacitat`,
+    `campus` VARCHAR(64) NOT NULL,
+    `edifici` VARCHAR(64) NOT NULL,
+    `codi` CHAR(9) NOT NULL,
+    `capacitat` VARCHAR(8) NOT NULL,
     PRIMARY KEY (`codi`,`campus`,`edifici`)
 );
 
@@ -59,22 +59,22 @@ CREATE TABLE `aula_equipament` (
 );
 
 CREATE TABLE `assignatura` (
-    `codi`,
-    `nom`,
-    `tipologia`,
+    `codi` CHAR(9),
+    `nom` VARCHAR(128),
+    `tipologia`	ENUM('Troncal', 'Especialitat','Optativa','Lliure Disposició') NOT NULL ,
     PRIMARY KEY(`codi`)
 );
 
 CREATE TABLE `pla_estudis` (
-    `codi`,
-    `nom`,
-    `any_implantació`,
-    `estat`,
+    `codi` CHAR(9),
+    `nom` VARCHAR(128),
+    `any_implantació` SMALLINT UNSIGNED,
+    `estat`ENUM('Pendent','Actiu','Derogat'),
     PRIMARY KEY(`codi`)
 );
 
 CREATE TABLE `pla_estudis_assignat` (
-    `codi_oficial_assign`,
+    `codi_oficial_assign` CHAR(4) NOT NULL,
     `curs`,
     `semestre`,
     `crédits_ects`
@@ -100,3 +100,4 @@ CREATE TABLE `sessió`(
     `número`,
     PRIMARY KEY (`data_sessió`)
 );
+ALTER TABLE 
