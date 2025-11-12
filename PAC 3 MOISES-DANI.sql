@@ -96,11 +96,13 @@ CREATE TABLE `matricula_assignatura` (
     `actes_2a`DECIMAL(4,2) NOT NULL,
     `actes_extra`DECIMAL(4,2) NOT NULL
 );
+
 CREATE TABLE `horari`(
     `dia`	DATE NOT NULL,
     `hora_inici`DATETIME NOT NULL,
     `hora_fi`DATETIME NULL
 );
+
 CREATE TABLE `sessió`(
     `data_sessió`TIME  UNIQUE NOT NULL,
     `número`CHAR(9) NOT NULL,
