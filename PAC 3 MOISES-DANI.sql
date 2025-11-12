@@ -61,6 +61,7 @@ CREATE TABLE `aula` (
 
 CREATE TABLE `aula_equipament` (
     `equipament`
+	
 );
 
 CREATE TABLE `assignatura` (
