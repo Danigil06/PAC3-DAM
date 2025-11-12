@@ -108,4 +108,43 @@ CREATE TABLE `sessió`(
 );
 -- --------------- FIN CREACION TABLAS ------------------
 
-ALTER TABLE 
+-- --------------- CREACION RELACIONES------------------
+-- Relació PERSONA <--> PROFESSOR
+ALTER TABLE `professor` ADD CONSTRAINT fk_professor_persona
+FOREIGN KEY (`CODI_PERSONA`) REFERENCES `persona`(`CODI`)
+ON UPDATE CASCADE ON DELETE NO ACTION;
+
+-- Relació PERSONA <--> ALUMNE
+ALTER TABLE `alumne` ADD CONSTRAINT fk_alumne_persona
+FOREIGN KEY (`CODI_PERSONA`) REFERENCES `persona`(`CODI`)
+ON UPDATE CASCADE ON DELETE NO ACTION;
+
+-- Relació PERSONA <--> TELEFON
+ALTER TABLE `persona_telefon` ADD CONSTRAINT fk_persona_telefon_persona
+FOREIGN KEY (`CODI_PERSONA`) REFERENCES `persona`(`CODI`)
+ON UPDATE CASCADE ON DELETE NO ACTION;
+
+-- Relació AULA <--> AULA_EQUIPAMENT
+ALTER TABLE `aula_equipament` ADD CONSTRAINT fk_aula_equipament_aula
+FOREIGN KEY (`CAMPUS`, `EDIFICI`, `CODI_AULA`) REFERENCES `aula`(`CAMPUS`, `EDIFICI`, `CODI`)
+ON UPDATE CASCADE ON DELETE CASCADE;
+
+-- Relació PROFESSOR <--> GRUP_DOCENT
+ALTER TABLE `professor_grup_docent` ADD CONSTRAINT fk_pg_professor
+FOREIGN KEY (`CODI_PROFESSOR`) REFERENCES `professor`(`CODI_PERSONA`)
+ON UPDATE CASCADE ON DELETE NO ACTION;
+
+ALTER TABLE `professor_grup_docent` ADD CONSTRAINT fk_pg_grup_docent
+FOREIGN KEY (`CODI_GRUP_DOCENT`) REFERENCES `grup_docent`(`CODI`)
+ON UPDATE CASCADE ON DELETE NO ACTION;
+
+-- Relació ALUMNE <--> ALUMNE_ESTAT
+ALTER TABLE `alumne_estat` ADD CONSTRAINT fk_alumne_estat_alumne
+FOREIGN KEY (`CODI_ALUMNE`) REFERENCES `alumne`(`CODI_PERSONA`)
+ON UPDATE CASCADE ON DELETE NO ACTION;
+-- --------------- FIN CREACION RELACIONES ------------------
+
+-- --------------- CREACION ROLES ------------------
+
+-- --------------- FIN CREACION ROLES ------------------
+
