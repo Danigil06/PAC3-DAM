@@ -19,3 +19,24 @@ GRANT INSERT, UPDATE ON `PAC3`.`Matricula_Assignatura` TO `professor`;
 
 -- APLICACIÓ DELS CANVIS
 FLUSH PRIVILEGES;
+
+DROP USER IF EXISTS 'jvancells'@'%';
+DROP USER IF EXISTS 'smoreno'@'%';
+DROP USER IF EXISTS 'dgonzalez'@'%';
+
+CREATE USER 'jvancells'@'%' IDENTIFIED BY 'password_jvancells';
+CREATE USER 'smoreno'@'%' IDENTIFIED BY 'password_smoreno';
+CREATE USER 'dgonzalez'@'%' IDENTIFIED BY 'password_dgonzalez';
+
+GRANT `tecnic` TO 'jvancells'@'%';
+GRANT `professor` TO 'jvancells'@'%';
+
+GRANT `administratiu` TO 'smoreno'@'%';
+
+GRANT `professor` TO 'dgonzalez'@'%';
+
+SET DEFAULT ROLE ALL TO 'jvancells'@'%';
+SET DEFAULT ROLE ALL TO 'smoreno'@'%';
+SET DEFAULT ROLE ALL TO 'dgonzalez'@'%';
+
+FLUSH PRIVILEGES;
