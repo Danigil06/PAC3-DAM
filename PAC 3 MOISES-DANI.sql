@@ -144,6 +144,50 @@ ON UPDATE CASCADE ON DELETE NO ACTION;
 ALTER TABLE `alumne_estat` ADD CONSTRAINT fk_alumne_estat_alumne
 FOREIGN KEY (`CODI_ALUMNE`) REFERENCES `alumne`(`CODI_PERSONA`)
 ON UPDATE CASCADE ON DELETE NO ACTION;
+ALTER TABLE `pla_estudis_assignat`
+ADD CONSTRAINT `fk_pla_est_assign_pla` 
+    FOREIGN KEY (`codi_pla_estudis`) REFERENCES `pla_estudis`(`codi`)
+    ON UPDATE CASCADE ON DELETE CASCADE,
+ADD CONSTRAINT `fk_pla_est_assign_assig` 
+    FOREIGN KEY (`codi_assignatura`) REFERENCES `assignatura`(`codi`)
+    ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE `matricula`
+ADD CONSTRAINT `fk_matricula_alumne` 
+    FOREIGN KEY (`codi_alumne`) REFERENCES `alumne`(`codi_persona`)
+    ON UPDATE CASCADE ON DELETE NO ACTION,
+ADD CONSTRAINT `fk_matricula_grup` 
+    FOREIGN KEY (`codi_grup_docent`) REFERENCES `grup_docent`(`codi`)
+    ON UPDATE CASCADE ON DELETE NO ACTION;
+
+ALTER TABLE `matricula_assignatura`
+ADD CONSTRAINT `fk_matr_assig_assignatura` 
+    FOREIGN KEY (`codi_assignatura`) REFERENCES `assignatura`(`codi`)
+    ON UPDATE CASCADE ON DELETE NO ACTION,
+ADD CONSTRAINT `fk_matr_assig_alumne` 
+    FOREIGN KEY (`codi_alumne`) REFERENCES `alumne`(`codi_persona`)
+    ON UPDATE CASCADE ON DELETE NO ACTION,
+ADD CONSTRAINT `fk_matr_assig_grup` 
+    FOREIGN KEY (`codi_grup_docent`) REFERENCES `grup_docent`(`codi`)
+    ON UPDATE CASCADE ON DELETE NO ACTION;
+
+ALTER TABLE `sessio`
+ADD CONSTRAINT `fk_sessio_grup` 
+    FOREIGN KEY (`codi_grup_docent`) REFERENCES `grup_docent`(`codi`)
+    ON UPDATE CASCADE ON DELETE NO ACTION,
+ADD CONSTRAINT `fk_sessio_aula` 
+    FOREIGN KEY (`campus`, `edifici`, `codi_aula`) REFERENCES `aula`(`campus`, `edifici`, `codi`)
+    ON UPDATE CASCADE ON DELETE NO ACTION;
+
+ALTER TABLE `horari`
+ADD CONSTRAINT `fk_horari_sessio` 
+    FOREIGN KEY (`dia`, `hora_inici`, `hora_fi`) REFERENCES `sessio`(`dia`, `hora_inici`, `hora_fi`)
+    ON UPDATE CASCADE ON DELETE NO ACTION;
+
+ALTER TABLE `aula_equipament`
+ADD CONSTRAINT `fk_aula_equip_aula` 
+    FOREIGN KEY (`campus`, `edifici`, `codi_aula`) REFERENCES `aula`(`campus`, `edifici`, `codi`)
+    ON UPDATE CASCADE ON DELETE CASCADE;
 -- --------------- FIN CREACION RELACIONES ------------------
 
 -- --------------- CREACION ROLES ------------------
