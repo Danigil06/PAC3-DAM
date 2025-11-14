@@ -1,4 +1,4 @@
--- --------------- CREACION DATABASE ------------------
+
 DROP DATABASE IF EXISTS `Facultat`;
 
 CREATE DATABASE IF NOT EXISTS `Facultat`;
