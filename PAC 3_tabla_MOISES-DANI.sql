@@ -1,13 +1,10 @@
 -- --------------- CREACION DATABASE ------------------
-
 DROP DATABASE IF EXISTS `Facultat`;
 
 CREATE DATABASE IF NOT EXISTS `Facultat`;
 
 USE `Facultat`;
--- --------------- FIN CREACION DATABASE ------------------
 
--- --------------- CREACION TABLAS ------------------
 CREATE TABLE `professor`(
     `num_seg_social` CHAR(12) UNIQUE NOT NULL,
     `email_institucional` VARCHAR(64) UNIQUE NOT NULL,
@@ -76,7 +73,7 @@ CREATE TABLE `pla_estudis` (
     `codi` CHAR(9) UNIQUE NOT NULL,
     `nom` VARCHAR(128) NOT NULL,
     `any_implantació` SMALLINT UNSIGNED NOT NULL,
-    `estat`ENUM('Pendent','Actiu','Derogat') NOT NULL,
+    `estat` ENUM('Pendent','Actiu','Derogat') NOT NULL,
     PRIMARY KEY(`codi`)
 );
 
@@ -109,42 +106,40 @@ CREATE TABLE `sessió`(
     `número`CHAR(9) NOT NULL,
     PRIMARY KEY (`data_sessió`)
 );
--- --------------- FIN CREACION TABLAS ------------------
 
--- --------------- CREACION RELACIONES------------------
--- Relació PERSONA <--> PROFESSOR
-ALTER TABLE `professor` ADD CONSTRAINT fk_professor_persona
-FOREIGN KEY (`CODI_PERSONA`) REFERENCES `persona`(`CODI`)
-ON UPDATE CASCADE ON DELETE NO ACTION;
+ALTER TABLE `professor`
+ADD CONSTRAINT `fk_professor_persona` 
+    FOREIGN KEY (`CODI_PERSONA`) REFERENCES `persona`(`CODI`)
+    ON UPDATE CASCADE ON DELETE NO ACTION;
 
--- Relació PERSONA <--> ALUMNE
-ALTER TABLE `alumne` ADD CONSTRAINT fk_alumne_persona
-FOREIGN KEY (`CODI_PERSONA`) REFERENCES `persona`(`CODI`)
-ON UPDATE CASCADE ON DELETE NO ACTION;
+ALTER TABLE `alumne`
+ADD CONSTRAINT `fk_alumne_persona` 
+    FOREIGN KEY (`CODI_PERSONA`) REFERENCES `persona`(`CODI`)
+    ON UPDATE CASCADE ON DELETE NO ACTION;
 
--- Relació PERSONA <--> TELEFON
-ALTER TABLE `persona_telefon` ADD CONSTRAINT fk_persona_telefon_persona
-FOREIGN KEY (`CODI_PERSONA`) REFERENCES `persona`(`CODI`)
-ON UPDATE CASCADE ON DELETE NO ACTION;
+ALTER TABLE `persona_telefon`
+ADD CONSTRAINT `fk_persona_telefon_persona` 
+    FOREIGN KEY (`CODI_PERSONA`) REFERENCES `persona`(`CODI`)
+    ON UPDATE CASCADE ON DELETE NO ACTION;
 
--- Relació AULA <--> AULA_EQUIPAMENT
-ALTER TABLE `aula_equipament` ADD CONSTRAINT fk_aula_equipament_aula
-FOREIGN KEY (`CAMPUS`, `EDIFICI`, `CODI_AULA`) REFERENCES `aula`(`CAMPUS`, `EDIFICI`, `CODI`)
-ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE `aula_equipament`
+ADD CONSTRAINT `fk_aula_equipament_aula` 
+    FOREIGN KEY (`CAMPUS`, `EDIFICI`, `CODI_AULA`) REFERENCES `aula`(`CAMPUS`, `EDIFICI`, `CODI`)
+    ON UPDATE CASCADE ON DELETE CASCADE;
 
--- Relació PROFESSOR <--> GRUP_DOCENT
-ALTER TABLE `professor_grup_docent` ADD CONSTRAINT fk_pg_professor
-FOREIGN KEY (`CODI_PROFESSOR`) REFERENCES `professor`(`CODI_PERSONA`)
-ON UPDATE CASCADE ON DELETE NO ACTION;
+ALTER TABLE `professor_grup_docent`
+ADD CONSTRAINT `fk_pg_professor` 
+    FOREIGN KEY (`CODI_PROFESSOR`) REFERENCES `professor`(`CODI_PERSONA`)
+    ON UPDATE CASCADE ON DELETE NO ACTION,
+ADD CONSTRAINT `fk_pg_grup_docent` 
+    FOREIGN KEY (`CODI_GRUP_DOCENT`) REFERENCES `grup_docent`(`CODI`)
+    ON UPDATE CASCADE ON DELETE NO ACTION;
 
-ALTER TABLE `professor_grup_docent` ADD CONSTRAINT fk_pg_grup_docent
-FOREIGN KEY (`CODI_GRUP_DOCENT`) REFERENCES `grup_docent`(`CODI`)
-ON UPDATE CASCADE ON DELETE NO ACTION;
+ALTER TABLE `alumne_estat`
+ADD CONSTRAINT `fk_alumne_estat_alumne` 
+    FOREIGN KEY (`CODI_ALUMNE`) REFERENCES `alumne`(`CODI_PERSONA`)
+    ON UPDATE CASCADE ON DELETE NO ACTION;
 
--- Relació ALUMNE <--> ALUMNE_ESTAT
-ALTER TABLE `alumne_estat` ADD CONSTRAINT fk_alumne_estat_alumne
-FOREIGN KEY (`CODI_ALUMNE`) REFERENCES `alumne`(`CODI_PERSONA`)
-ON UPDATE CASCADE ON DELETE NO ACTION;
 ALTER TABLE `pla_estudis_assignat`
 ADD CONSTRAINT `fk_pla_est_assign_pla` 
     FOREIGN KEY (`codi_pla_estudis`) REFERENCES `pla_estudis`(`codi`)
@@ -189,5 +184,4 @@ ALTER TABLE `aula_equipament`
 ADD CONSTRAINT `fk_aula_equip_aula` 
     FOREIGN KEY (`campus`, `edifici`, `codi_aula`) REFERENCES `aula`(`campus`, `edifici`, `codi`)
     ON UPDATE CASCADE ON DELETE CASCADE;
--- --------------- FIN CREACION RELACIONES ------------------
 
