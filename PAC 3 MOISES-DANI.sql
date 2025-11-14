@@ -191,7 +191,3 @@ ADD CONSTRAINT `fk_aula_equip_aula`
     ON UPDATE CASCADE ON DELETE CASCADE;
 -- --------------- FIN CREACION RELACIONES ------------------
 
--- --------------- CREACION ROLES ------------------
-
--- --------------- FIN CREACION ROLES ------------------
-
