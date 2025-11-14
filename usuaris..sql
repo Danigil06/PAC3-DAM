@@ -1,7 +1,6 @@
 -- CREACIÓ DE ROLS
 DROP ROLE IF EXISTS `tecnic`, `administratiu`, `professor`;
 
--- CREACION DE ROLES
 CREATE ROLE `tecnic`;
 CREATE ROLE `administratiu`;
 CREATE ROLE `professor`;
