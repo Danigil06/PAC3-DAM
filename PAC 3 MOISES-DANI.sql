@@ -60,7 +60,8 @@ CREATE TABLE `aula` (
 );
 
 CREATE TABLE `aula_equipament` (
-    `equipament`
+    `equipament` VARCHAR (128) NOT NULL
+	PRIMARY KEY (`equipament`)
 	
 );
 
